@@ -32,7 +32,7 @@ El cual nos ayudo a realizar las peticiones a nuestra base de datos.
 - :gear: **Heroku**: es una plataforma que nos permite saltarnos muchos pasos de configuración de arquitectura y lanzar una aplicación en sencillos pasos.
 
 
-- :gear: **Sequelize**: proporciona una solución sencilla y basada en esquemas para modelar los datos de la aplicación. Incluye conversión de tipos integrada, validación, creación de consultas, enlaces de lógica de negocios y mucho más, de fábrica.
+- :gear: **Mongoose**: proporciona una solución sencilla y basada en esquemas para modelar los datos de la aplicación. Incluye conversión de tipos integrada, validación, creación de consultas, enlaces de lógica de negocios y mucho más, de fábrica.
 
 ## Uso de la API
 
