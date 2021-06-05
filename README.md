@@ -89,7 +89,7 @@ Es importante aclarar que no es necesario agregar el id ya que es autoasignado p
 
 #### Ejemplo 2
 
-En este ejemplo solo hariamos la consulta de todas las reseñas.
+En este ejemplo solo hariamos la consulta de todas los comentarios hechos.
 
 Pasos: 
 
