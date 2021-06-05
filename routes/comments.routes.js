@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { commentsGet, commentsPost, commentsPut, commentsDelete} = require('../controllers/coments.controllers');
+const { commentsGet, commentsPost, commentsPut, commentsDelete} = require('../apiServices/comments/controller');
 
 const router = Router();
 

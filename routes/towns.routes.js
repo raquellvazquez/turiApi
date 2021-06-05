@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { townsGet, townsPost, townsPut, townsDelete} = require('../controllers/towns.controllers');
+const { townsGet, townsPost, townsPut, townsDelete} = require('../apiServices/towns/controller');
 
 const router = Router();
 
