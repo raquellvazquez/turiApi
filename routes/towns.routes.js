@@ -1,11 +1,12 @@
 const { Router } = require('express');
-const { townsGet, townsPost, townsPut, townsDelete} = require('../apiServices/towns/controller');
-const jwtValidation = require('../auth/auth');
+const { townsGet, townsPost, townsPut, townsDelete, townsGetById} = require('../apiServices/towns/controller');
+
 const router = Router();
 
 router.get('/', townsGet)
-    .put('/:id', jwtValidation, townsPut )
-    .post('/', jwtValidation, townsPost )
-    .delete('/', townsDelete );
+    .get('/:id', townsGetById)
+    .put('/:id', townsPut )
+    .post('/', townsPost )
+    .delete('/:id', townsDelete );
 
 module.exports = router;
