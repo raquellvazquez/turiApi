@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-//const Town = require('../towns/model');
-//const User = require('../users/model');
+const Town = require('../towns/model');
+const User = require('../users/model');
 
 const commentSchema = new mongoose.Schema({
         name: { type : String , required: true},
