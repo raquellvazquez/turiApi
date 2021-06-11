@@ -116,7 +116,7 @@ const LogInUser = (req, res) => {
           });
           bcrypt.compare(password, user.password)
           .then(match => {
-              if(match) return res.status(200).json({username: user.username, name: user.name, email: user.email, isAdmin: user.isAdmin, token: user.getJWT()});
+              if(match) return res.status(200).json({id: user._id, username: user.username, name: user.name, email: user.email, isAdmin: user.isAdmin, token: user.getJWT()});
               return res.status(400).json({message: "Wrong Password"});
           }).catch(error => {
               console.error(error);
