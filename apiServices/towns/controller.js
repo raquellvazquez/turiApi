@@ -1,12 +1,20 @@
 const Town = require('./model');
-const schema = require ('./joiValidation');
+const Comment = require('../comments/model')
+const schema = require('./joiValidation');
 
 const townsGet = (req, res) => {
-    
+
     let result = getTowns();
 
-    result.then(data => {
-        res.status(200).json(data)
+    result.then(async data => {
+        const dataRated = await Promise.all(data.map(async el => {
+           
+            let pts = await getRating(el._id);
+            
+            return { ...el._doc, pts };
+        }));
+
+        res.status(200).json(dataRated);
     })
     .catch(err => {
         res.status(404).json({
@@ -27,14 +35,13 @@ const townsGetById = (req, res) => {
             err
         })
     })
-    
 }
 
 const townsPost = (req, res) => {
 
     const { error , value } = schema.validate(req.body);
 
-    if(!error ) {
+    if (!error) {
 
         let add = createTown(value);
         add.then( data => {
@@ -50,14 +57,13 @@ const townsPost = (req, res) => {
         const msg = error.details[0].message;
         res.status(400).send(msg)
     }
-    
 }
 
 const townsPut = (req, res) => {
 
     const { error , value } = schema.validate(req.body);
 
-    if(!error ) {
+    if (!error) {
         let result = updateInfoTown(req.params.id , value);
 
         result.then( data => {
@@ -78,7 +84,7 @@ const townsPut = (req, res) => {
 const townsDelete = (req, res) => {
 
     let result = deleteTown(req.params.id);
-    
+
     result.then(data => {
         res.status(200).send(`${data.name} Deleted`)
     })
@@ -102,12 +108,11 @@ async function getById(id) {
 
 async function createTown(values) {
     let newTown = await new Town({
-        name : values.name,
-        state : values.state,
+        name: values.name,
+        state: values.state,
         infoState: values.infoState,
-        img : values.img,
-        pts : values.pts,
-        attractions:  values.attractions
+        img: values.img,
+        attractions: values.attractions
     });
     return newTown.save();
 }
@@ -115,20 +120,34 @@ async function createTown(values) {
 async function updateInfoTown(id, values) {
     let updated = await Town.findByIdAndUpdate(id, {
         $set: {
-            name : values.name,
-            state : values.state,
+            name: values.name,
+            state: values.state,
             infoState: values.infoState,
-            img : values.img,
-            pts : values.pts,
-            attractions:  values.attractions
+            img: values.img,
+            attractions: values.attractions
         }
-    }, { new : true});
+    }, { new: true });
     return updated;
 }
 
 async function deleteTown(id) {
     let eliminated = await Town.findByIdAndRemove(id);
     return eliminated;
+}
+
+async function getRating(id) {
+    let rating;
+
+    await Comment.aggregate([{ $match: { dataTownId: id } },
+    { $group: { _id: "$dataTownId", average: { $avg: "$pts" } } }], function (err, result) {
+        if (err) {
+            console.error(err);
+        } else if (result.length) {
+            rating = result[0].average;
+        }
+    });
+    
+    return rating || 0;
 }
 
 module.exports = {
