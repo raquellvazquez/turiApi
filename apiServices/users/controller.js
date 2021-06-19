@@ -23,23 +23,25 @@ const usersGet = async (req, res) => {
 
 const usersPost = async (req, res) => {
     const { name, username, email, password } = req.body;
+
     const isAdmin = false;
-    delete password;
-    try {
-        const user = await new UserModel({
-            name,
-            username,
-            email,
-            password,
-            isAdmin
-        }).save();
-        res.status(201).json(user.responseUserCreation());
-    } catch(e) {
-        console.error(e);
-        res.status(400).json({
-            message: "Error, invalid information"
-          });
-    }
+     delete password;
+     try {
+     const user = await new UserModel({
+         name,
+         username,
+         email,
+         password,
+         isAdmin,
+         image : req.file.path,
+     }).save();
+         res.status(201).json(user.responseUserCreation());
+     } catch(e) {
+         console.error(e);
+         res.status(400).json({
+             message: "Error, invalid information"
+           });
+     }
 }
 
 const usersDelete = async (req, res) => {
@@ -116,7 +118,7 @@ const LogInUser = (req, res) => {
           });
           bcrypt.compare(password, user.password)
           .then(match => {
-              if(match) return res.status(200).json({id: user._id, username: user.username, name: user.name, email: user.email, isAdmin: user.isAdmin, token: user.getJWT()});
+              if(match) return res.status(200).json({id: user._id, username: user.username, name: user.name, email: user.email, isAdmin: user.isAdmin, image: user.image, token: user.getJWT()});
               return res.status(400).json({message: "Wrong Password"});
           }).catch(error => {
               console.error(error);

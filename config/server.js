@@ -10,6 +10,10 @@ class Server {
         this.userPath = '/users';
         this.townsPath = '/towns';
         this.commentsPath = '/comments';
+        this.app.get('/', (req, res) => {
+            res.status(204);
+            res.end()
+          })
 
         /**
          * Midellware
@@ -35,7 +39,8 @@ class Server {
     }
 
     middlewares() {
-        this.app.use(express.json());
+        this.app.use(express.static('public'))
+        this.app.use(express.json());   
     }
 }
 
