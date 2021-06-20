@@ -6,7 +6,6 @@ const townSchema = new mongoose.Schema(
         state: { type : String , required: true},
         infoState: { type : String , required: true},
         img: { type : String , required: true},
-        pts: { type : String , required: true},
         attractions: { type : Array , required: true},
     },
 )

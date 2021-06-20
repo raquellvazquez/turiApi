@@ -91,12 +91,12 @@ const commentsDelete = (req, res) => {
 
 // Helpers
 async function getComments() {
-    let commentList = await Comment.find();
+    let commentList = await Comment.find().populate("dataTownId", "name").populate("userId", "name").exec();
     return commentList;
 };
 
 async function getById(id) {
-    let comment = await Comment.findById(id).exec();
+    let comment = await Comment.findById(id).populate("userId", "name").populate("dataTownId", "name").exec();
     return comment;
 }
 

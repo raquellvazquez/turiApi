@@ -16,8 +16,6 @@ const schema = Joi.object({
     img: Joi.string()
         .required(),
 
-    pts: Joi.string(),
-
     attractions: Joi.array()
         .max(3)
         .min(1)

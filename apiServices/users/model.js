@@ -30,6 +30,9 @@ const userSchema = new mongoose.Schema(
       match: [/\S+@\S+\.\S+/, "Email invalido"],
       index: true,
     },
+    image: {
+      type: String,
+    },
     isAdmin: {
       type: Boolean,
     },
@@ -59,6 +62,7 @@ userSchema.methods.publicData = function(){
       isAdmin: this.isAdmin,
       createdAt: this.createdAt,
       updatedAt: this.updatedAt,
+      image: this.image,
     };
   };
 
