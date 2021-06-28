@@ -8,7 +8,7 @@ const multer = require('../multer/multer');
 
 router.get('/', usersGet)
 
-router.put('/:id', jwtValidation, authorization, usersPut );
+router.put('/:id',  jwtValidation, authorization, usersPut );
 
 router.post('/',multer.single("image"), usersPost );
 

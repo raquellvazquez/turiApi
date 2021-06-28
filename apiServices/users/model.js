@@ -33,6 +33,9 @@ const userSchema = new mongoose.Schema(
     image: {
       type: String,
     },
+    description: {
+      type: String,
+    },
     isAdmin: {
       type: Boolean,
     },
@@ -63,6 +66,7 @@ userSchema.methods.publicData = function(){
       createdAt: this.createdAt,
       updatedAt: this.updatedAt,
       image: this.image,
+      description: this.description,
     };
   };
 
