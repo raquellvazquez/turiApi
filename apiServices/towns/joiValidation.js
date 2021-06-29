@@ -9,6 +9,10 @@ const schema = Joi.object({
         .min(1)
         .required(),
 
+    excerpt: Joi.string()
+        .min(1)
+        .required(),
+
     infoState: Joi.string()
         .required()
         .min(1),

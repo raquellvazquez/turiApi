@@ -110,6 +110,7 @@ async function createTown(values) {
     let newTown = await new Town({
         name: values.name,
         state: values.state,
+        excerpt: values.excerpt,
         infoState: values.infoState,
         img: values.img,
         attractions: values.attractions
@@ -122,6 +123,7 @@ async function updateInfoTown(id, values) {
         $set: {
             name: values.name,
             state: values.state,
+            excerpt: values.excerpt,
             infoState: values.infoState,
             img: values.img,
             attractions: values.attractions
