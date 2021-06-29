@@ -11,9 +11,6 @@ const schema = Joi.object({
     dataTownId: Joi.string()
         .required(),
 
-    userId: Joi.string()
-        .required(),
-
     img: Joi.string()
     .required(),
 })
