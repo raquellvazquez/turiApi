@@ -67,6 +67,7 @@ userSchema.methods.publicData = function(){
       updatedAt: this.updatedAt,
       image: this.image,
       description: this.description,
+      email: this.email,
     };
   };
 
